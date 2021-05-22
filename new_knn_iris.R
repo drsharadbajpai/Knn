@@ -29,3 +29,10 @@ iris_test <-iris_n[130:150, ]
 
 iris_train_target <- iris2[1:129, 5]
 iris_test_target <- iris2[130:150, 5]
+
+require(class)
+
+#Running knn algorithm
+m1 <- knn(train= iris_train, test=iris_test, cl = iris_train_target, k=13)
+m1
+table(iris_test_target, m1)
