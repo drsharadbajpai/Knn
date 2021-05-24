@@ -2,8 +2,16 @@
 library(C50)
 library(caret)
 library(readr)
-churnTrain <- read_csv("WA_Fn-UseC_-Telco-Customer-Churn.csv")
-View(churnTrain)
-str(churnTrain)
 
-predictors <- names(churnTrain)[names(churnTrain)!= "churn"] 
+data("mlc_churn")
+churn <- mlc_churn
+View(churn)
+str(churn)
+
+predictors <- names(churn)[names(churn)!= "churn"] 
+data_df <- as.data.frame(churn)
+set.seed(1)
+inTrainingSet<- createDataPartition(data_df$Churn, p =.75, list= FALSE)
+churnTrain <- data_df[inTrainingSet,]
+churnTest <- data_df[-inTrainingSet,]
+
