@@ -50,4 +50,11 @@ gbmFit <- gbm(formula = churn~.,           #Use all predictors
 library(e1071)
 gbmTune <- train(churn ~. ,data = churnTrain, method = "gbm", verbose= FALSE)
 
+#Changing the resampling techinque
+ctrl <- trainControl(method = "repeatedcv",
+                     repeats = 5)
 
+gbmTune <- train(churn ~., data=churnTrain,
+                 method = "gbm",
+                 verbose = FALSE,
+                 trControl = ctrl)
