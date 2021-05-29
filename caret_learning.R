@@ -58,3 +58,16 @@ gbmTune <- train(churn ~., data=churnTrain,
                  method = "gbm",
                  verbose = FALSE,
                  trControl = ctrl)
+
+#Using different performance Metrics
+
+ctrl <- trainControl(method = "repeatedcv",
+              repeats = 5,
+              classProbs = TRUE,
+              summaryFunction = twoClassSummary)
+
+gbmTune <- train(churn ~., data=churnTrain,
+                 method = "gbm",
+                 metric = "ROC",
+                 verbose = FALSE,
+                 trControl = ctrl)
